@@ -1,5 +1,5 @@
 # Deal with MySQL service
-mysql:
+mysql-server:
   service.running:
     - enable: True
     - reload: True
