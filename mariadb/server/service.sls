@@ -2,6 +2,7 @@
 extend:
   mysql-server:
     service.running:
+      - name: mysql
       - enable: True
       - reload: True
       - watch:
