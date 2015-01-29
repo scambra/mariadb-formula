@@ -1,6 +1,6 @@
 # Config stuff for MySQL relateds
 {% set os_family = salt['grains.get']('os_family', None) %}
-{%- set server_config = salt['pillar.get']('mariadb:server:mysqld') %}
+{%- set server_config = salt['pillar.get']('mariadb:server:config') %}
 
 # Teach Salt to use the debian.cnf file
 {%- if os_family == 'Debian' %}
@@ -16,12 +16,14 @@ salt_mysql_config:
 {% endif %}
 
 {%- if server_config is defined and server_config is mapping %}
-/etc/mysql/my.cnf:
+/etc/mysql/conf.d/customized.cnf:
   ini.options_present:
     - sections:
-        mysqld:
-{%- for key, value in server_config.items() %}
+{%- for name, section in server_config.items() %}
+        {{ name }}:
+{%- for key, value in section.items() %}
           {{ key }}: {{ value|json() }}
+{%- endfor %}
 {%- endfor %}
     - watch_in:
       - service: mysql-server
