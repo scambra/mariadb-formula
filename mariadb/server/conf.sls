@@ -17,14 +17,11 @@ salt_mysql_config:
 
 {%- if server_config is defined and server_config is mapping %}
 /etc/mysql/conf.d/customized.cnf:
-  ini.options_present:
-    - sections:
-{%- for name, section in server_config.items() %}
-        {{ name }}:
-{%- for key, value in section.items() %}
-          {{ key }}: {{ value|json() }}
-{%- endfor %}
-{%- endfor %}
+  file.managed:
+    - source: salt://mariadb/server/files/custom.cnf.jinja
+    - template: jinja
+    - context:
+        server_config: {{ server_config | json() }}
     - watch_in:
       - service: mysql-server
     - require:

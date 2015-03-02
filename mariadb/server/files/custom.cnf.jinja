@@ -1,0 +1,8 @@
+# Custom configuration for MySQL
+# Template: {{ source }}
+{%- for name, section in server_config.items() %}
+[{{ name }}]
+{%- for key, value in section.items() %}
+{{ key }} = {{ value }}
+{%- endfor %}
+{%- endfor %}
