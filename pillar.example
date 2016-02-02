@@ -2,5 +2,6 @@ mariadb:
   version: 'latest'
   server:
     root_password: secret
-    mysqld:
-      bind-address: 0.0.0.0
+    config:
+      mysqld:
+        bind-address: 0.0.0.0
