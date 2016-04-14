@@ -1,5 +1,7 @@
 # mariadb-formula
 
+[![Travis branch](https://img.shields.io/travis/Enrise/mariadb-formula/master.svg?style=flat-square)](https://travis-ci.org/Enrise/mariadb-formula)
+
 This formula will install MariaDB from the official repo.
 
 ## Compatibility

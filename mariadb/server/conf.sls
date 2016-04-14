@@ -13,6 +13,8 @@ salt_mysql_config:
       - pkg: mysql-server
     - watch_in:
       - service: salt-minion
+    - require_in:
+      - service: salt-minion
 {% endif %}
 
 {%- if server_config is defined and server_config is mapping %}
