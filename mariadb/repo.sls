@@ -9,6 +9,12 @@
 {% else %}{% set id_prefix = "mariadb" -%}
 {% endif -%}
 
+# Starting with Ubuntu 15.10 the signing key has changed
+{%- set repo_key = salt['pillar.get']('mariadb:repokey', "0xcbcb082a1bb943db") %}
+{%- if salt['grains.get']('osfullname') == 'Ubuntu' and salt['grains.get']('osrelease')|float() >= 15.10 %}
+{%- set repo_key = "0xF1656F24C74CD1D8" %}
+{%- endif %}
+
 # Install MariaDB repository
 {{ id_prefix }}_repo:
   pkgrepo.managed:
@@ -22,7 +28,7 @@
     {%- endif %}
     - dist: {{ lsb_codename }}
     - file: /etc/apt/sources.list.d/mariadb.list
-    - keyid: '0xcbcb082a1bb943db'
+    - keyid: "{{ repo_key }}"
     - keyserver: keyserver.ubuntu.com
     - refresh: True
     - clean_file: True
