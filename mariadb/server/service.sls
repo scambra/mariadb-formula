@@ -5,15 +5,8 @@ extend:
     service.running:
       - name: mysql
       - enable: True
+      - reload: {% if init_system != 'systemd' -%} True {% else %} False {% endif %}
       - watch:
         - pkg: mysql-server
       - require:
         - pkg: mysql-server
-
-# There is no reload target when using systemd
-{% if init_system != 'systemd' -%}
-extend:
-  mysql-server:
-    service.running:
-      - reload: True
-{% endif %}
