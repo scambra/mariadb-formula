@@ -26,9 +26,3 @@ mysql-server:
       - debconf: mysql_debconf
 {%- endif %}
 #      - pkgrepo: mariadb_server_repo
-
-# We need python-mysqldb in order to make users and such
-python-mysqldb:
-  pkg.installed:
-    - watch_in:
-      - service: salt-minion

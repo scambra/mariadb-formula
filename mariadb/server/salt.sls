@@ -15,3 +15,9 @@ salt_mysql_config:
     - require_in:
       - service: salt-minion
 {% endif %}
+
+# We need python-mysqldb in order to make users and such
+python-mysqldb:
+  pkg.installed:
+    - watch_in:
+      - service: salt-minion
