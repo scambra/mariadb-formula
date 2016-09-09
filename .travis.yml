@@ -8,7 +8,7 @@ env:
     - BS_ECHO_DEBUG=1
     - SALT_ARGS="-l debug --local --retcode-passthrough --pillar-root=.salt/pillar --file-root=$PWD"
   matrix:
-    - STATE=mariadb.travis,mariadb
+    - STATE=mariadb
 
 before_install:
   - sudo apt-get update
