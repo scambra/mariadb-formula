@@ -1,3 +1,4 @@
+{%- set os_family = salt['grains.get']('os_family').lower() %}
 {%- set lsb_codename = salt['grains.get']('lsb_distrib_codename') %}
 {%- set stable_version = '10.1' %}
 {%- set repo_version = salt['pillar.get']('mariadb:repo_version', stable_version) %}
@@ -20,11 +21,11 @@
   pkgrepo.managed:
     - humanname: MariaDB PPA
     {%- if version == 'latest' %}
-    - name: deb {{ repourl }}/repo/{{ stable_version }}/ubuntu {{ lsb_codename }} main
+    - name: deb {{ repourl }}/repo/{{ stable_version }}/{{ os_family }} {{ lsb_codename }} main
     {%- elif repo_version %}
-    - name: deb {{ repourl }}/repo/{{ repo_version }}/ubuntu {{ lsb_codename }} main
+    - name: deb {{ repourl }}/repo/{{ repo_version }}/{{ os_family }} {{ lsb_codename }} main
     {%- else %}
-    - name: deb {{ repourl }}/mariadb-{{ version }}/repo/ubuntu {{ lsb_codename }} main
+    - name: deb {{ repourl }}/mariadb-{{ version }}/repo/{{ os_family }} {{ lsb_codename }} main
     {%- endif %}
     - dist: {{ lsb_codename }}
     - file: /etc/apt/sources.list.d/mariadb.list
