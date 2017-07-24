@@ -1,4 +1,4 @@
-{%- set os_family = salt['grains.get']('os_family').lower() %}
+{%- set os_family = salt['grains.get']('os_family')|lower %}
 {%- set lsb_codename = salt['grains.get']('lsb_distrib_codename') %}
 {%- set stable_version = '10.1' %}
 {%- set repo_version = salt['pillar.get']('mariadb:repo_version', stable_version) %}
