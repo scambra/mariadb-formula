@@ -17,18 +17,22 @@
 {%- endif %}
 
 # Deal with difference between stable/repo version and explicit versions
-{%- set repo_url_version = stable_version %}
 {%- if version is defined and version != 'latest' %}
-{%- set repo_url_version = 'mariadb-' ~ version %}
+# Use the specific version
+{%- set repo_url_partial = 'mariadb-' ~ version ~ '/repo' %}
 {%- elif repo_version is defined %}
-{%- set repo_url_version = repo_version %}
+# Use the repo version (e.g. 10.3)
+{%- set repo_url_partial = 'repo/' ~ repo_version %}
+{%- else %}
+# Fall back to default
+{%- set repo_url_partial = 'repo/' ~ stable_version %}
 {%- endif %}
 
 # Install MariaDB repository
 {{ id_prefix }}_repo:
   pkgrepo.managed:
     - humanname: MariaDB PPA
-    - name: deb {{ repourl }}/repo/{{ repo_url_version }}/ubuntu {{ lsb_codename }} main
+    - name: deb {{ repourl }}/{{ repo_url_partial }}/ubuntu {{ lsb_codename }} main
     - dist: {{ lsb_codename }}
     - file: /etc/apt/sources.list.d/mariadb.list
     - keyid: "{{ repo_key }}"
