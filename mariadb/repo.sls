@@ -18,7 +18,7 @@
 
 # Deal with difference between stable/repo version and explicit versions
 {%- set repo_url_version = stable_version %}
-{%- if version is defined and version !== 'latest' %}
+{%- if version is defined and version != 'latest' %}
 {%- set repo_url_version = 'mariadb-' ~ version %}
 {%- elif repo_version is defined %}
 {%- set repo_url_version = repo_version %}
