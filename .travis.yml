@@ -6,9 +6,12 @@ env:
   global:
     - BS_PIP_ALLOWED=1
     - BS_ECHO_DEBUG=1
-    - SALT_ARGS="-l debug --local --retcode-passthrough --pillar-root=.salt/pillar --file-root=$PWD"
-  matrix:
     - STATE=mariadb
+  matrix:
+    - SALT_ARGS="-l debug --local --retcode-passthrough --pillar-root=.salt/pillar/10.1 --file-root=$PWD"
+    - SALT_ARGS="-l debug --local --retcode-passthrough --pillar-root=.salt/pillar/10.1.10 --file-root=$PWD"
+    - SALT_ARGS="-l debug --local --retcode-passthrough --pillar-root=.salt/pillar/10.2 --file-root=$PWD"
+    - SALT_ARGS="-l debug --local --retcode-passthrough --pillar-root=.salt/pillar/10.3 --file-root=$PWD"
 
 before_install:
   - sudo apt-get update
