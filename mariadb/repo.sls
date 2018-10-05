@@ -28,17 +28,7 @@
 {{ id_prefix }}_repo:
   pkgrepo.managed:
     - humanname: MariaDB PPA
-<<<<<<< HEAD
     - name: deb {{ repourl }}/repo/{{ repo_url_version }}/ubuntu {{ lsb_codename }} main
-=======
-    {%- if version == 'latest' %}
-    - name: deb {{ repourl }}/repo/{{ stable_version }}/{{ os_name }} {{ lsb_codename }} main
-    {%- elif repo_version %}
-    - name: deb {{ repourl }}/repo/{{ repo_version }}/{{ os_name }} {{ lsb_codename }} main
-    {%- else %}
-    - name: deb {{ repourl }}/mariadb-{{ version }}/repo/{{ os_name }} {{ lsb_codename }} main
-    {%- endif %}
->>>>>>> master
     - dist: {{ lsb_codename }}
     - file: /etc/apt/sources.list.d/mariadb.list
     - keyid: "{{ repo_key }}"
