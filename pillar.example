@@ -1,6 +1,6 @@
 mariadb:
   version: 'latest'
-  repo_version: '10.1'
+  repo_version: '10.2'
   server:
     root_password: secret
     config:
