@@ -2,7 +2,7 @@
 {%- set lsb_codename = salt['grains.get']('lsb_distrib_codename') %}
 {%- set stable_version = '10.1' %}
 {%- set repo_version = salt['pillar.get']('mariadb:repo_version') %}
-{%- set version = salt['pillar.get']('mariadb:version') %}
+{%- set version = salt['pillar.get']('mariadb:version', 'latest') %}
 {%- set repourl = salt['pillar.get']('mariadb:repourl', 'http://ftp.nluug.nl/db/mariadb') %}
 
 {% if sls == "mariadb.client.repo" %}{% set id_prefix = "mariadb_client" -%}
