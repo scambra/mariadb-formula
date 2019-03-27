@@ -1,7 +1,7 @@
 {%- set os_name = salt['grains.get']('os')|lower %}
 {%- set lsb_codename = salt['grains.get']('lsb_distrib_codename') %}
 {%- set stable_version = '10.1' %}
-{%- set repo_version = salt['pillar.get']('mariadb:repo_version') %}
+{%- set repo_version = salt['pillar.get']('mariadb:repo_version', None) %}
 {%- set version = salt['pillar.get']('mariadb:version', 'latest') %}
 {%- set repourl = salt['pillar.get']('mariadb:repourl', 'http://ftp.nluug.nl/db/mariadb') %}
 
@@ -17,10 +17,10 @@
 {%- endif %}
 
 # Deal with difference between stable/repo version and explicit versions
-{%- if version is defined and version != 'latest' %}
+{%- if version is defined and version != None and version != 'latest' %}
 # Use the specific version
 {%- set repo_url_partial = 'mariadb-' ~ version ~ '/repo' %}
-{%- elif repo_version is defined %}
+{%- elif repo_version is defined and repo_version != None %}
 # Use the repo version (e.g. 10.3)
 {%- set repo_url_partial = 'repo/' ~ repo_version %}
 {%- else %}
