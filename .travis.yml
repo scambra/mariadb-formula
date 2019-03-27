@@ -13,6 +13,7 @@ env:
     - SALT_ARGS="-l debug --local --retcode-passthrough --pillar-root=.salt/pillar/10.2 --file-root=$PWD"
     - SALT_ARGS="-l debug --local --retcode-passthrough --pillar-root=.salt/pillar/10.3 --file-root=$PWD"
     - SALT_ARGS="-l debug --local --retcode-passthrough --pillar-root=.salt/pillar/10.3.13 --file-root=$PWD"
+    - SALT_ARGS="-l debug --local --retcode-passthrough --pillar-root=.salt/pillar/10.4 --file-root=$PWD"
 
 before_install:
   - sudo apt-get update
