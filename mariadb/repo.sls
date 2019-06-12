@@ -10,9 +10,10 @@
 {% else %}{% set id_prefix = "mariadb" -%}
 {% endif -%}
 
-# Starting with Ubuntu 16.04 the signing key has changed
+# Starting with Ubuntu 16.04 and Debian 9 the signing key has changed
 {%- set repo_key = salt['pillar.get']('mariadb:repokey', "0xcbcb082a1bb943db") %}
-{%- if salt['grains.get']('osfullname') == 'Ubuntu' and salt['grains.get']('osrelease')|float() >= 16.04 %}
+{%- if salt['grains.get']('osfullname') == 'Ubuntu' and salt['grains.get']('osrelease')|float() >= 16.04 or
+      salt['grains.get']('osfullname') == 'Debian' and salt['grains.get']('osrelease')|float() >= 9 %}
 {%- set repo_key = "0xF1656F24C74CD1D8" %}
 {%- endif %}
 
