@@ -33,7 +33,7 @@
 {{ id_prefix }}_repo:
   pkgrepo.managed:
     - humanname: MariaDB PPA
-    - name: deb [arch=amd64] {{ repourl }}/{{ repo_url_partial }}/ubuntu {{ lsb_codename }} main
+    - name: deb [arch=amd64] {{ repourl }}/{{ repo_url_partial }}/{{ os_name }} {{ lsb_codename }} main
     - dist: {{ lsb_codename }}
     - file: /etc/apt/sources.list.d/mariadb.list
     - keyid: "{{ repo_key }}"
