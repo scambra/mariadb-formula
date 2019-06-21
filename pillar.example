@@ -1,6 +1,7 @@
 mariadb:
   version: 'latest'
   repo_version: '10.2'
+  dev-pkg: libmariadb-dev-compat
   server:
     root_password: secret
     config:

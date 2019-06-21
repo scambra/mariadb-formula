@@ -2,4 +2,4 @@
 
 maria_dev:
   pkg.installed:
-    - name: libmariadb-dev
+    - name: {{ pillar.get('mariadb', {}).get('dev-pkg', 'libmariadb-dev-compat') }}
